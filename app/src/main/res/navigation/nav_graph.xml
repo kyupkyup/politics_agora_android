@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/votes"
+        android:name="com.example.politicsagora.findByVote.Votes"
+        android:label="fragment_votes"
+        tools:layout="@layout/fragment_votes">
+        <action
+            android:id="@+id/action_votes_to_candidatesOfVote"
+            app:destination="@id/candidatesOfVote" />
+    </fragment>
+    <fragment
+        android:id="@+id/candidates"
+        android:name="com.example.politicsagora.findByCandidate.Candidates"
+        android:label="fragment_candidates"
+        tools:layout="@layout/fragment_candidates">
+        <action
+            android:id="@+id/action_candidates_to_votesOfCandidate"
+            app:destination="@id/votesOfCandidate" />
+    </fragment>
+    <fragment
+        android:id="@+id/candidatesOfVote"
+        android:name="com.example.politicsagora.findByVote.CandidatesOfVote"
+        android:label="fragment_candidates_of_vote"
+        tools:layout="@layout/fragment_candidates_of_vote" />
+    <fragment
+        android:id="@+id/votesOfCandidate"
+        android:name="com.example.politicsagora.findByCandidate.VotesOfCandidate"
+        android:label="fragment_votes_of_candidate"
+        tools:layout="@layout/fragment_votes_of_candidate" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.politicsagora.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_votes"
+            app:destination="@id/votes" />
+        <action
+            android:id="@+id/action_mainFragment_to_candidates"
+            app:destination="@id/candidates" />
+    </fragment>
+</navigation>
