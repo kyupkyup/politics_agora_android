@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.politicsagora.model.Candidate
-import com.example.politicsagora.model.Vote
 import com.example.politicsagora.repository.APIGetCandidatesService
 import com.example.politicsagora.repository.APIGetVoteCodeService
 import kotlinx.coroutines.launch

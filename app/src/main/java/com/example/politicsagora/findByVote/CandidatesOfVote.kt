@@ -38,6 +38,11 @@ class CandidatesOfVote : Fragment() {
         return inflater.inflate(R.layout.fragment_candidates_of_vote, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //TODO("뷰모델 구성해서 받아온 선거 코드 값 넣어주고, api fetch 해서 adapter로 연결")
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

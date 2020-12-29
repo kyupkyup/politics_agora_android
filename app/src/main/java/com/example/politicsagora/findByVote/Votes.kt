@@ -47,21 +47,7 @@ class Votes : Fragment() {
         viewModel.itemLiveData.observe(viewLifecycleOwner, Observer{
             voteAdapter.updateVoteItems(it)
         })
-//        viewModel.apply {
-//            itemLiveData.observe(viewLifecycleOwner, Observer {
-//            })
-////            loadingItemLiveData.observe(viewLifecycleOwner, Observer{
-////                isLoading ->
-////            } )
-//        }
-
-//        val items = listOf(
-//            Vote("asdf", "asdf", "123", "1234","123"),
-//            Vote("asdf", "asdf", "123", "1234","123"),
-//            Vote("asdf", "asdf", "123", "1234","123")
-//        )
-//        voteAdapter.updateVoteItems(items)
-
+        //TODO("navControlloer 로 다음 fragment로 접근 -> 선거 코드 넘겨줘야 함. 해당 선거 코드에 맞는 후보자 api 연결")
     }
 }
 

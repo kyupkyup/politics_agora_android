@@ -57,6 +57,7 @@ class Candidates : Fragment() {
         viewModel.itemLiveData.observe(viewLifecycleOwner, Observer{
             candidateAdapter.updateCandidateItems(it)
         })
+        //TODO("navControlloer 로 다음 fragment로 접근 -> activity 호출")
 
     }
 }
