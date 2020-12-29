@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +16,8 @@ import com.example.politicsagora.adapter.CanditatesListAdapter
 import com.example.politicsagora.adapter.VoteListAdapter
 import com.example.politicsagora.model.Candidate
 import com.example.politicsagora.model.Vote
+import com.example.politicsagora.viewmodel.CandidatesViewModel
+import com.example.politicsagora.viewmodel.VotesViewmodel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +30,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class Candidates : Fragment() {
+    private val viewModel: CandidatesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,66 +47,16 @@ class Candidates : Fragment() {
 //            val action = CandidatesDirections.actionCandidatesToVotesOfCandidate()
 //            findNavController().navigate(action)
 //        }
-        val CandidateAdapter = CanditatesListAdapter()
+        val candidateAdapter = CanditatesListAdapter()
         val candidate_recycler_view: RecyclerView = view.findViewById(R.id.candidate_recycler_view)
 
         candidate_recycler_view.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = CandidateAdapter
+            adapter = candidateAdapter
         }
-        val items = listOf(
-            Candidate(
-                "asdfasdfasdf",
-                "asdf",
-                "123",
-                "1234",
-                "asdf",
-                "asdfasdf",
-                "asdffdsf",
-                "123123",
-                "123123123",
-                "1123123",
-                "asdfsd",
-                "asdfa",
-                "asdf",
-                "asdf",
-                "asdfasd", "asdf", "asdf", "asdf1", "asdf", "asdf"
-            ),
-            Candidate(
-                "asdf",
-                "asdf",
-                "123",
-                "1234",
-                "asdf",
-                "asdfasdf",
-                "asdffdsf",
-                "123123",
-                "123123123",
-                "1123123",
-                "asdfsd",
-                "asdfa",
-                "asdf",
-                "asdf",
-                "asdfasd", "asdf", "asdf", "asdf1", "asdf", "asdf"
-            ), Candidate(
-                "asdf",
-                "asdf",
-                "123",
-                "1234",
-                "asdf",
-                "asdfasdf",
-                "asdffdsf",
-                "123123",
-                "123123123",
-                "1123123",
-                "asdfsd",
-                "asdfa",
-                "asdf",
-                "asdf",
-                "asdfasd", "asdf", "asdf", "asdf1", "asdf", "asdf"
-            )
-        )
-        CandidateAdapter.updateCandidateItems(items)
+        viewModel.itemLiveData.observe(viewLifecycleOwner, Observer{
+            candidateAdapter.updateCandidateItems(it)
+        })
 
     }
 }

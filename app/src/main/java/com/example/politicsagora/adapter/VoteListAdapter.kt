@@ -1,5 +1,6 @@
 package com.example.politicsagora.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ class VoteListAdapter :RecyclerView.Adapter<VoteViewHolder>() {
 
     fun updateVoteItems( items : List<Vote>){
         voteItems = items
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VoteViewHolder {
@@ -31,11 +33,13 @@ class VoteListAdapter :RecyclerView.Adapter<VoteViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: VoteViewHolder, position: Int) {
-        holder.textView1.text = voteItems[position].sgId
+        holder.textView1.text = voteItems[position].sgName
+
     }
 
     override fun getItemCount(): Int {
         return voteItems.size
+
     }
 }
 

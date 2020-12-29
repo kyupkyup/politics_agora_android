@@ -24,6 +24,7 @@ class CanditatesListAdapter : RecyclerView.Adapter<CandidateViewHolder>() {
 
     fun updateCandidateItems( items : List<Candidate>){
         CandidateItems = items
+        notifyDataSetChanged()
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -38,7 +39,7 @@ class CanditatesListAdapter : RecyclerView.Adapter<CandidateViewHolder>() {
         holder: CandidateViewHolder,
         position: Int
     ) {
-        holder.textView.text = CandidateItems[position].sgId
+        holder.textView.text = CandidateItems[position].candidateName
 
     }
 

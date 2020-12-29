@@ -1,26 +1,40 @@
 package com.example.politicsagora.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Candidate (
+    @SerializedName("num")
+    var num : String,
     var sgId : String,
-    var sgTypeCode : String,
+    var sgTypecode : String,
+    @SerializedName("huboid")
     var candidateId : String,
+    @SerializedName("sggName")
     var  sgRegionName : String,
+    @SerializedName("sdName")
     var cityName  : String,
+    @SerializedName("wiwName")
     var adminCityName : String,
     var giho : String,
+    var gihoSangse: String,
+    @SerializedName("jdName")
     var party : String,
-    var candidateMame :String,
+    @SerializedName("name")
+    var candidateName :String,
+    @SerializedName("hanjaName")
+
     var candidateChineseName : String,
     var gender : String,
     var birthday : String,
     var age : String,
-    var address : String,
+    var addr : String,
     var jobId : String,
     var job : String,
     var eduId : String,
     var edu : String,
     var career1 : String,
-    var career2 : String
+    var career2 : String,
+    var status : String
         )
 
 

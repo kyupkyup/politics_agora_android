@@ -5,14 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.politicsagora.R
 import com.example.politicsagora.adapter.VoteListAdapter
-import com.example.politicsagora.model.Vote
+import com.example.politicsagora.viewmodel.VotesViewmodel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +24,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class Votes : Fragment() {
-
+    private val viewModel: VotesViewmodel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,12 +44,34 @@ class Votes : Fragment() {
             adapter = voteAdapter
         }
 
-        val items = listOf(
-            Vote("asdf", "asdf", "123", "1234"),
-            Vote("asdf", "asdf", "123", "1234"),
-            Vote("asdf", "asdf", "123", "1234")
-        )
-        voteAdapter.updateVoteItems(items)
+        viewModel.itemLiveData.observe(viewLifecycleOwner, Observer{
+            voteAdapter.updateVoteItems(it)
+        })
+//        viewModel.apply {
+//            itemLiveData.observe(viewLifecycleOwner, Observer {
+//            })
+////            loadingItemLiveData.observe(viewLifecycleOwner, Observer{
+////                isLoading ->
+////            } )
+//        }
+
+//        val items = listOf(
+//            Vote("asdf", "asdf", "123", "1234","123"),
+//            Vote("asdf", "asdf", "123", "1234","123"),
+//            Vote("asdf", "asdf", "123", "1234","123")
+//        )
+//        voteAdapter.updateVoteItems(items)
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+

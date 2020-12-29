@@ -43,7 +43,6 @@ class MainFragment : Fragment() {
         fragmentFirstBinding = binding
         binding.button2.setOnClickListener{
             val actionMainFragmentToFindByCandidate = MainFragmentDirections.actionMainFragmentToCandidates()
-            Log.d("action", actionMainFragmentToFindByCandidate.toString())
             findNavController().navigate(actionMainFragmentToFindByCandidate)
         }
         binding.button3.setOnClickListener{
