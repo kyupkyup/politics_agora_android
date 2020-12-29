@@ -1,0 +1,51 @@
+package com.example.politicsagora.model
+
+data class Candidate (
+    var sgId : String,
+    var sgTypeCode : String,
+    var candidateId : String,
+    var  sgRegionName : String,
+    var cityName  : String,
+    var adminCityName : String,
+    var giho : String,
+    var party : String,
+    var candidateMame :String,
+    var candidateChineseName : String,
+    var gender : String,
+    var birthday : String,
+    var age : String,
+    var address : String,
+    var jobId : String,
+    var job : String,
+    var eduId : String,
+    var edu : String,
+    var career1 : String,
+    var career2 : String
+        )
+
+
+/*
+* [ { num: [ '1' ],
+    sgId: [ '20200415' ],
+    sgTypecode: [ '2' ],
+    huboid: [ '100136749' ],
+    sggName: [ '종로구' ],
+    sdName: [ '서울특별시' ],
+    wiwName: [ '종로구' ],
+    giho: [ '1' ],
+    gihoSangse: [ '' ],
+    jdName: [ '더불어민주당' ],
+    name: [ '이낙연' ],
+    hanjaName: [ '李洛淵' ],
+    gender: [ '남' ],
+    birthday: [ '19521220' ],
+    age: [ '67' ],
+    addr: [ '서울특별시 종로구 송월길' ],
+    jobId: [ '75' ],
+    job: [ '정당인' ],
+    eduId: [ '68' ],
+    edu: [ '서울대학교 법과대학 법학과 졸업' ],
+    career1: [ '(현)민주당 코로나19국난극복위원장' ],
+    career2: [ '(전)제45대 국무총리' ],
+    status: [ '등록' ] },
+* */

@@ -8,7 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.politicsagora.R
+import com.example.politicsagora.adapter.VoteListAdapter
+import com.example.politicsagora.model.Vote
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +26,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class Votes : Fragment() {
 
+    private val layoutManager: RecyclerView.LayoutManager? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,11 +38,20 @@ class Votes : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val button : Button = view.findViewById(R.id.button5)
-        button.setOnClickListener{
-            val action = VotesDirections.actionVotesToCandidatesOfVote()
-            findNavController().navigate(action)
+        val voteAdapter = VoteListAdapter()
+        val vote_recycler_view: RecyclerView = view.findViewById(R.id.vote_recycler_view)
+
+        vote_recycler_view.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = voteAdapter
         }
+
+        val items = listOf(
+            Vote("asdf", "asdf", "123", "1234"),
+            Vote("asdf", "asdf", "123", "1234"),
+            Vote("asdf", "asdf", "123", "1234")
+        )
+        voteAdapter.updateVoteItems(items)
 
     }
 }
