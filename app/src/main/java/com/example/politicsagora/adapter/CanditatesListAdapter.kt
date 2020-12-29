@@ -3,18 +3,28 @@ package com.example.politicsagora.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.politicsagora.R
 import com.example.politicsagora.model.Candidate
+import com.example.politicsagora.model.Vote
 
 class CandidateViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-    //TODO("후보자 view 생성해서 변수 입력 및 초기화") 뷰바인딩
+    val textView : TextView
+
+    init {
+        textView = itemView.findViewById(R.id.textView2)
+    }
 
 }
 
 class CanditatesListAdapter : RecyclerView.Adapter<CandidateViewHolder>() {
     private var CandidateItems : List<Candidate> = ArrayList<Candidate>()
 
+
+    fun updateCandidateItems( items : List<Candidate>){
+        CandidateItems = items
+    }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -28,7 +38,8 @@ class CanditatesListAdapter : RecyclerView.Adapter<CandidateViewHolder>() {
         holder: CandidateViewHolder,
         position: Int
     ) {
-        TODO("뷰모델에서 데이터 받아와서 view에 바인딩해주기")
+        holder.textView.text = CandidateItems[position].sgId
+
     }
 
     override fun getItemCount(): Int {

@@ -26,7 +26,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class Votes : Fragment() {
 
-    private val layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
