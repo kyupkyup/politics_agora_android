@@ -6,8 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
+
 import androidx.navigation.fragment.findNavController
 import com.example.politicsagora.databinding.ActivityMainBinding
 import com.example.politicsagora.databinding.FragmentMainBinding
@@ -24,6 +23,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class MainFragment : Fragment() {
     private var fragmentFirstBinding: FragmentMainBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }

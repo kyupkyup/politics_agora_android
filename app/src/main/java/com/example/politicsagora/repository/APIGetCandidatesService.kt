@@ -9,7 +9,6 @@ interface APIGetCandidatesService {
     suspend fun fetchCandidates(
         @Query("sgId") sgId: String,
         @Query("sgTypecode") sgTypecode: String
-
     ): Candidates
 
     companion object {

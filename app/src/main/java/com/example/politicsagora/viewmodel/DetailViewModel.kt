@@ -1,9 +1,12 @@
 package com.example.politicsagora.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.politicsagora.model.Candidate
+import com.example.politicsagora.model.CandidateDetail
+import com.example.politicsagora.repository.APIGetCandidateDetailService
 import com.example.politicsagora.repository.APIGetCandidatesService
 import com.example.politicsagora.repository.APIGetVoteCodeService
 import kotlinx.coroutines.launch
@@ -12,12 +15,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
-class CandidatesViewModel : ViewModel() {
-    val itemLiveData = MutableLiveData<List<Candidate>>()
+class DetailViewModel : ViewModel() {
+    val itemLiveData = MutableLiveData<List<CandidateDetail>>()
     val loadingItemLiveData = MutableLiveData<Boolean>()
 
-    private var service : APIGetCandidatesService
+    var sgId: String = ""
+    var sgTypecode: String = ""
+    var candidateId: String = ""
+
+    private var service: APIGetCandidateDetailService
 
     init {
         val okHttpClient = OkHttpClient.Builder()
@@ -27,21 +33,21 @@ class CandidatesViewModel : ViewModel() {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl(APIGetVoteCodeService.BASE_URL)
+            .baseUrl(APIGetCandidateDetailService.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        service = retrofit.create(APIGetCandidatesService::class.java)
-        fetchCandidateInfo()
+        service = retrofit.create(APIGetCandidateDetailService::class.java)
     }
 
-    fun fetchCandidateInfo(){
+    fun fetchCandidateInfo() {
         loadingItemLiveData.value = true
-
         viewModelScope.launch {
-            val candidateInfo = service.fetchCandidates("20200415", "2");
-            itemLiveData.value = candidateInfo.candidates
+            val candidateDetailInfo = service.fetchCandidatesDetail(sgId, sgTypecode, candidateId);
+            itemLiveData.value = candidateDetailInfo.candidateDetails
+            Log.d("result11", itemLiveData.value.toString())
+
         }
         loadingItemLiveData.value = false
 

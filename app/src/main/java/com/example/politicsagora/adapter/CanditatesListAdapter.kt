@@ -26,6 +26,9 @@ class CanditatesListAdapter : RecyclerView.Adapter<CandidateViewHolder>() {
         CandidateItems = items
         notifyDataSetChanged()
     }
+    fun returnClick(received_position: Int) : Candidate{
+        return CandidateItems[received_position]
+    }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

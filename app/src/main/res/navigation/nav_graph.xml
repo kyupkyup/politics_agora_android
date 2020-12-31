@@ -13,6 +13,7 @@
         <action
             android:id="@+id/action_votes_to_candidatesOfVote"
             app:destination="@id/candidatesOfVote" />
+
     </fragment>
     <fragment
         android:id="@+id/candidates"
@@ -20,19 +21,26 @@
         android:label="fragment_candidates"
         tools:layout="@layout/fragment_candidates">
         <action
-            android:id="@+id/action_candidates_to_votesOfCandidate"
-            app:destination="@id/votesOfCandidate" />
+            android:id="@+id/action_candidates_to_detailActivity"
+            app:destination="@id/detailActivity" />
     </fragment>
     <fragment
         android:id="@+id/candidatesOfVote"
         android:name="com.example.politicsagora.findByVote.CandidatesOfVote"
         android:label="fragment_candidates_of_vote"
-        tools:layout="@layout/fragment_candidates_of_vote" />
-    <fragment
-        android:id="@+id/votesOfCandidate"
-        android:name="com.example.politicsagora.findByCandidate.VotesOfCandidate"
-        android:label="fragment_votes_of_candidate"
-        tools:layout="@layout/fragment_votes_of_candidate" />
+        tools:layout="@layout/fragment_candidates_of_vote" >
+        <argument
+            android:name="sgId"
+            app:argType="string" />
+        <argument
+            android:name="sgTypecode"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_candidatesOfVote_to_detailActivity"
+            app:destination="@id/detailActivity" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.politicsagora.MainFragment"
@@ -45,4 +53,19 @@
             android:id="@+id/action_mainFragment_to_candidates"
             app:destination="@id/candidates" />
     </fragment>
+    <activity
+        android:id="@+id/detailActivity"
+        android:name="com.example.politicsagora.DetailActivity"
+        android:label="activity_detail"
+        tools:layout="@layout/activity_detail" >
+        <argument
+            android:name="sgId"
+            app:argType="string" />
+        <argument
+            android:name="candidateId"
+            app:argType="string" />
+        <argument
+            android:name="sgTypecode"
+            app:argType="string" />
+    </activity>
 </navigation>

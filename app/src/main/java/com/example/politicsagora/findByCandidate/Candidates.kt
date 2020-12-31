@@ -1,6 +1,8 @@
 package com.example.politicsagora.findByCandidate
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.politicsagora.R
 import com.example.politicsagora.adapter.CanditatesListAdapter
 import com.example.politicsagora.adapter.VoteListAdapter
+import com.example.politicsagora.findByVote.CandidatesOfVoteDirections
 import com.example.politicsagora.model.Candidate
 import com.example.politicsagora.model.Vote
+import com.example.politicsagora.util.RecyclerViewItemClickListener
 import com.example.politicsagora.viewmodel.CandidatesViewModel
 import com.example.politicsagora.viewmodel.VotesViewmodel
 
@@ -31,6 +35,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class Candidates : Fragment() {
     private val viewModel: CandidatesViewModel by viewModels()
+    private val mContext: Context? = getContext()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,11 +47,7 @@ class Candidates : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val button : Button = view.findViewById(R.id.button4)
-//        button.setOnClickListener {
-//            val action = CandidatesDirections.actionCandidatesToVotesOfCandidate()
-//            findNavController().navigate(action)
-//        }
+
         val candidateAdapter = CanditatesListAdapter()
         val candidate_recycler_view: RecyclerView = view.findViewById(R.id.candidate_recycler_view)
 
@@ -54,10 +55,27 @@ class Candidates : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = candidateAdapter
         }
-        viewModel.itemLiveData.observe(viewLifecycleOwner, Observer{
+        viewModel.itemLiveData.observe(viewLifecycleOwner, Observer {
             candidateAdapter.updateCandidateItems(it)
         })
-        //TODO("navControlloer 로 다음 fragment로 접근 -> activity 호출")
 
+        candidate_recycler_view.addOnItemTouchListener(
+            RecyclerViewItemClickListener(
+                mContext,
+                candidate_recycler_view,
+                object : RecyclerViewItemClickListener.OnItemClickListener {
+                    override fun onItemClick(view: View, position: Int) {
+                        val items: Candidate = candidateAdapter.returnClick(position)
+                        Log.d("result", items.toString())
+                        val action =
+                            CandidatesOfVoteDirections.actionCandidatesOfVoteToDetailActivity(
+                                items.sgId,
+                                items.candidateId,
+                                items.sgTypecode
+                            )
+                        findNavController().navigate(action)
+                    }
+                })
+        )
     }
 }
