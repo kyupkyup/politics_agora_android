@@ -1,6 +1,8 @@
 package com.example.politicsagora.findByCandidate
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -20,6 +22,7 @@ import com.example.politicsagora.findByVote.CandidatesOfVoteDirections
 import com.example.politicsagora.model.Candidate
 import com.example.politicsagora.model.Vote
 import com.example.politicsagora.util.RecyclerViewItemClickListener
+import com.example.politicsagora.viewSource.LoadingDialog
 import com.example.politicsagora.viewmodel.CandidatesViewModel
 import com.example.politicsagora.viewmodel.VotesViewmodel
 
@@ -35,7 +38,14 @@ private const val ARG_PARAM2 = "param2"
  */
 class Candidates : Fragment() {
     private val viewModel: CandidatesViewModel by viewModels()
-    private val mContext: Context? = getContext()
+    private lateinit var mContext: Context
+    private lateinit var loadingDialog: LoadingDialog
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,12 +61,17 @@ class Candidates : Fragment() {
         val candidateAdapter = CanditatesListAdapter()
         val candidate_recycler_view: RecyclerView = view.findViewById(R.id.candidate_recycler_view)
 
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        loadingDialog.show()
         candidate_recycler_view.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = candidateAdapter
         }
         viewModel.itemLiveData.observe(viewLifecycleOwner, Observer {
             candidateAdapter.updateCandidateItems(it)
+            loadingDialog.dismiss()
         })
 
         candidate_recycler_view.addOnItemTouchListener(
@@ -66,12 +81,25 @@ class Candidates : Fragment() {
                 object : RecyclerViewItemClickListener.OnItemClickListener {
                     override fun onItemClick(view: View, position: Int) {
                         val items: Candidate = candidateAdapter.returnClick(position)
-                        Log.d("result", items.toString())
                         val action =
-                            CandidatesOfVoteDirections.actionCandidatesOfVoteToDetailActivity(
+                            CandidatesDirections.actionCandidatesToDetailActivity(
                                 items.sgId,
                                 items.candidateId,
-                                items.sgTypecode
+                                items.sgTypecode,
+                                items.sgRegionName,
+                                items.cityName,
+                                items.gihoSangse,
+                                items.party,
+                                items.candidateName,
+                                items.candidateChineseName,
+                                items.gender,
+                                items.birthday,
+                                items.age,
+                                items.addr,
+                                items.job,
+                                items.edu,
+                                items.career1,
+                                items.career2
                             )
                         findNavController().navigate(action)
                     }

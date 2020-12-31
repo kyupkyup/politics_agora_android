@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_mainFragment_to_candidates"
             app:destination="@id/candidates" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailActivity"
+            app:destination="@id/detailActivity" />
     </fragment>
     <activity
         android:id="@+id/detailActivity"
@@ -67,5 +70,41 @@
         <argument
             android:name="sgTypecode"
             app:argType="string" />
+        <argument
+            android:name="sgRegionName"
+            app:argType="string" />
+        <argument
+            android:name="cityName"
+            app:argType="string" />
+        <argument
+            android:name="gihoSangse"
+            app:argType="string" />
+        <argument
+            android:name="party"
+            app:argType="string" />
+        <argument
+            android:name="candidateName"
+            app:argType="string" />
+        <argument
+            android:name="candidateChineseName"
+            app:argType="string" />
+        <argument
+            android:name="gender"
+            app:argType="string" />
+        <argument
+            android:name="birthday"
+            app:argType="string" />
+        <argument android:name="age" />
+        <argument
+            android:name="addr"
+            app:argType="string" />
+        <argument
+            android:name="job"
+            app:argType="string" />
+        <argument
+            android:name="edu"
+            app:argType="string" />
+        <argument android:name="career1" />
+        <argument android:name="career2" />
     </activity>
 </navigation>

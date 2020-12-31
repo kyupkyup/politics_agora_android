@@ -2,6 +2,8 @@ package com.example.politicsagora.findByVote
 
 import android.app.Application
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,6 +20,7 @@ import com.example.politicsagora.R
 import com.example.politicsagora.adapter.VoteListAdapter
 import com.example.politicsagora.model.Vote
 import com.example.politicsagora.util.RecyclerViewItemClickListener
+import com.example.politicsagora.viewSource.LoadingDialog
 import com.example.politicsagora.viewmodel.VotesViewmodel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,7 +35,13 @@ private const val ARG_PARAM2 = "param2"
  */
 class Votes : Fragment() {
     private val viewModel: VotesViewmodel by viewModels()
-    private val mContext: Context? = getContext()
+    private lateinit var mContext: Context
+    private lateinit var loadingDialog: LoadingDialog
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,9 +60,14 @@ class Votes : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = voteAdapter
         }
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        loadingDialog.show()
 
         viewModel.itemLiveData.observe(viewLifecycleOwner, Observer {
             voteAdapter.updateVoteItems(it)
+            loadingDialog.dismiss()
+
         })
 
         vote_recycler_view.addOnItemTouchListener(

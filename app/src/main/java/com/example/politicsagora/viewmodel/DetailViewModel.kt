@@ -22,6 +22,21 @@ class DetailViewModel : ViewModel() {
     var sgId: String = ""
     var sgTypecode: String = ""
     var candidateId: String = ""
+    var sgRegionName: String = ""
+    var cityName: String = ""
+    var gihoSangse: String = ""
+    var party: String = ""
+    var candidateName: String = ""
+    var candidateChineseName: String = ""
+    var gender: String = ""
+    var birthday: String = ""
+    var age: String = ""
+    var addr: String = ""
+    var job: String = ""
+    var edu: String = ""
+    var career1: String = ""
+    var career2: String = ""
+
 
     private var service: APIGetCandidateDetailService
 
@@ -46,7 +61,6 @@ class DetailViewModel : ViewModel() {
         viewModelScope.launch {
             val candidateDetailInfo = service.fetchCandidatesDetail(sgId, sgTypecode, candidateId);
             itemLiveData.value = candidateDetailInfo.candidateDetails
-            Log.d("result11", itemLiveData.value.toString())
 
         }
         loadingItemLiveData.value = false

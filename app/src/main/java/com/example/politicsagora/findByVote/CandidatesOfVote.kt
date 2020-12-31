@@ -1,6 +1,8 @@
 package com.example.politicsagora.findByVote
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,6 +21,7 @@ import com.example.politicsagora.findByCandidate.CandidatesDirections
 import com.example.politicsagora.model.Candidate
 import com.example.politicsagora.model.Vote
 import com.example.politicsagora.util.RecyclerViewItemClickListener
+import com.example.politicsagora.viewSource.LoadingDialog
 import com.example.politicsagora.viewmodel.CandidtatesOfVoteViewModel
 import com.example.politicsagora.viewmodel.VotesViewmodel
 
@@ -35,8 +38,13 @@ private const val ARG_PARAM2 = "param2"
 class CandidatesOfVote : Fragment() {
     private val viewModel: CandidtatesOfVoteViewModel by viewModels()
     val args: CandidatesOfVoteArgs by navArgs()
-    private val mContext: Context? = getContext()
+    private lateinit var mContext: Context
+    private lateinit var loadingDialog: LoadingDialog
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +63,6 @@ class CandidatesOfVote : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         val candidateAdapter = CanditatesListAdapter()
         val candidate_recycler_view: RecyclerView =
             view.findViewById(R.id.candidate_of_vote_recycler_view)
@@ -65,6 +71,10 @@ class CandidatesOfVote : Fragment() {
         viewModel.sgTypecode = args.sgTypecode
         viewModel.fetchCandidateInfo()
 
+        loadingDialog = LoadingDialog(mContext)
+        loadingDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        loadingDialog.show()
+
         candidate_recycler_view.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = candidateAdapter
@@ -72,7 +82,8 @@ class CandidatesOfVote : Fragment() {
 
         viewModel.itemLiveData.observe(viewLifecycleOwner, Observer {
             candidateAdapter.updateCandidateItems(it)
-        })        //TODO("뷰모델 구성해서 받아온 선거 코드 값 넣어주고, api fetch 해서 adapter로 연결")
+            loadingDialog.dismiss()
+        })
 
         candidate_recycler_view.addOnItemTouchListener(
             RecyclerViewItemClickListener(
@@ -85,7 +96,21 @@ class CandidatesOfVote : Fragment() {
                             CandidatesOfVoteDirections.actionCandidatesOfVoteToDetailActivity(
                                 items.sgId,
                                 items.candidateId,
-                                items.sgTypecode
+                                items.sgTypecode,
+                                items.sgRegionName,
+                                items.cityName,
+                                items.gihoSangse,
+                                items.party,
+                                items.candidateName,
+                                items.candidateChineseName,
+                                items.gender,
+                                items.birthday,
+                                items.age,
+                                items.addr,
+                                items.job,
+                                items.edu,
+                                items.career1,
+                                items.career2
                             )
                         findNavController().navigate(action)
                     }

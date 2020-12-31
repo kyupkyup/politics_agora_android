@@ -40,12 +40,38 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentMainBinding.bind(view)
+
         fragmentFirstBinding = binding
-        binding.button2.setOnClickListener{
-            val actionMainFragmentToFindByCandidate = MainFragmentDirections.actionMainFragmentToCandidates()
+        binding.button.setOnClickListener {
+            val actionMainToDetailActivity =
+                MainFragmentDirections.actionMainFragmentToDetailActivity(
+                    "20170509",
+                    "100120965",
+                    "1",
+                    "대한민국",
+                    "전국",
+                    "",
+                    "더불어민주당",
+                    "문재인",
+                    "文在寅",
+                    "남",
+                    "19530124",
+                    "64",
+                    "",
+                    "정당인",
+                    "경희대학교 법률학과 졸업",
+                    "(전)더불어민주당 당대표",
+                    "(전)제 19대 국회의원"
+                )
+            findNavController().navigate(actionMainToDetailActivity)
+        }
+
+        binding.button2.setOnClickListener {
+            val actionMainFragmentToFindByCandidate =
+                MainFragmentDirections.actionMainFragmentToCandidates()
             findNavController().navigate(actionMainFragmentToFindByCandidate)
         }
-        binding.button3.setOnClickListener{
+        binding.button3.setOnClickListener {
             val actionMainFragmentToFindByVote = MainFragmentDirections.actionMainFragmentToVotes()
             findNavController().navigate(actionMainFragmentToFindByVote)
         }
