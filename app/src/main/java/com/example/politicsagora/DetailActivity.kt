@@ -42,10 +42,12 @@ class DetailActivity : AppCompatActivity() {
         viewModel.career2= args.career2
 
         viewModel.fetchCandidateInfo()
+
+
         viewModel.itemLiveData.observe(this, Observer{
-            Log.d("result", viewModel.itemLiveData.value.toString())
+            // 공약보기 버튼 활성화  -> viewpager fragment로  넘어감
         })
 
 
-    }
+   }
 }

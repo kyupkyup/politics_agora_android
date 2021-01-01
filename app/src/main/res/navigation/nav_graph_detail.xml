@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_detail"
+    app:startDestination="@id/detailMainFragment2">
+    <fragment
+        android:id="@+id/detailMainFragment2"
+        android:name="com.example.politicsagora.detailFragments.DetailMainFragment"
+        android:label="fragment_detail_main"
+        tools:layout="@layout/fragment_detail_main" >
+        <action
+            android:id="@+id/action_detailMainFragment2_to_detailFragment2"
+            app:destination="@id/detailFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment2"
+        android:name="com.example.politicsagora.detailFragments.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
+</navigation>

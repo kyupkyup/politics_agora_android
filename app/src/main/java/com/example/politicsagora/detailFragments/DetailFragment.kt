@@ -50,49 +50,17 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        detailAdapter = DetailAdapter(this)
-        viewPager = view.findViewById(R.id.viewPager)
-        tabLayout = view.findViewById(R.id.tabLayout)
-
-        //TODO("뷰 모델에서 데이터 가져와서 tab 제목에 넣어줄 것.")
-        viewPager.adapter = detailAdapter
 
         sharedViewModel.itemLiveData.observe(viewLifecycleOwner, Observer {
+            detailAdapter = DetailAdapter(this, it)
+            viewPager = view.findViewById(R.id.viewPager)
+            tabLayout = view.findViewById(R.id.tabLayout)
+
+            viewPager.adapter = detailAdapter
+
             TabLayoutMediator(tabLayout, viewPager, TabLayoutMediator.TabConfigurationStrategy
             { tab, position ->
-                    when (position) {
-                        0 -> {
-                            tab.text = "후보자"
-                        }
-                        1->{
-                            tab.text = "정치"
-                        }
-                        2->{
-                            tab.text = "경제"
-                        }
-                        3->{
-                            tab.text = ""
-                        }
-                        4->{
-                            tab.text = ""
-                        }
-                        5->{
-                            tab.text = ""
-                        }
-                        6->{
-                            tab.text = ""
-                        }
-                        7->{
-                            tab.text = ""
-                        }
-                        8->{
-                            tab.text = ""
-                        }
-                        9->{
-                            tab.text = ""
-                        }
-                    }
-
+                tab.text = "${it[position].prmsRealmName}"
             }).attach()
         })
 

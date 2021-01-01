@@ -28,7 +28,7 @@
         android:id="@+id/candidatesOfVote"
         android:name="com.example.politicsagora.findByVote.CandidatesOfVote"
         android:label="fragment_candidates_of_vote"
-        tools:layout="@layout/fragment_candidates_of_vote" >
+        tools:layout="@layout/fragment_candidates_of_vote">
         <argument
             android:name="sgId"
             app:argType="string" />
@@ -60,7 +60,7 @@
         android:id="@+id/detailActivity"
         android:name="com.example.politicsagora.DetailActivity"
         android:label="activity_detail"
-        tools:layout="@layout/activity_detail" >
+        tools:layout="@layout/activity_detail">
         <argument
             android:name="sgId"
             app:argType="string" />
@@ -70,6 +70,7 @@
         <argument
             android:name="sgTypecode"
             app:argType="string" />
+
         <argument
             android:name="sgRegionName"
             app:argType="string" />
@@ -94,7 +95,9 @@
         <argument
             android:name="birthday"
             app:argType="string" />
-        <argument android:name="age" />
+        <argument
+            android:name="age"
+            app:argType="string" />
         <argument
             android:name="addr"
             app:argType="string" />
@@ -104,7 +107,12 @@
         <argument
             android:name="edu"
             app:argType="string" />
-        <argument android:name="career1" />
-        <argument android:name="career2" />
+        <argument
+            android:name="career1"
+            app:argType="string" />
+        <argument
+            android:name="career2"
+            app:argType="string" />
+
     </activity>
 </navigation>

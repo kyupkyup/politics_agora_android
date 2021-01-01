@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.politicsagora.R
+import com.example.politicsagora.model.ParsedCandidateDetail
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,7 +22,7 @@ private const val ARG_PARAM2 = "param2"
 
 private const val ARG_OBJECT = "object"
 
-class DetailFragment1 : Fragment() {
+class DetailPromiseFragment : Fragment() {
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -47,7 +48,7 @@ class DetailFragment1 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.takeIf { it.containsKey(ARG_OBJECT) }?.apply {
             val textView: TextView = view.findViewById(R.id.detail_text1)
-            textView.text = getInt(ARG_OBJECT).toString()
+            textView.text = getParcelable<ParsedCandidateDetail>(ARG_OBJECT).toString()
         }
     }
 }

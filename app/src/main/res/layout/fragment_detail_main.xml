@@ -3,18 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".detailFragments.DetailPromiseFragment">
+    tools:context=".detailFragments.DetailMainFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        >
+    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/detail_text1"
+        android:id="@+id/detail_main_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="15sp"
+        android:text="detail main" />
+
+    <Button
+        android:id="@+id/promise_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="공약보기"
+        android:gravity="center"
+
         />
-    </ScrollView>
+
 </FrameLayout>
