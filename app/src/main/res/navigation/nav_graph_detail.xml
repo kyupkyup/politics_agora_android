@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_detail"
-    app:startDestination="@id/detailMainFragment2">
+    app:startDestination="@id/detailMainFragment">
     <fragment
-        android:id="@+id/detailMainFragment2"
+        android:id="@+id/detailMainFragment"
         android:name="com.example.politicsagora.detailFragments.DetailMainFragment"
-        android:label="fragment_detail_main"
-        tools:layout="@layout/fragment_detail_main" >
+        android:label=""
+        tools:layout="@layout/fragment_detail_main">
         <action
-            android:id="@+id/action_detailMainFragment2_to_detailFragment2"
-            app:destination="@id/detailFragment2" />
+            android:id="@+id/action_detailMainFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/detailFragment2"
+        android:id="@+id/detailFragment"
         android:name="com.example.politicsagora.detailFragments.DetailFragment"
-        android:label="fragment_detail"
+        android:label=""
         tools:layout="@layout/fragment_detail" />
 </navigation>

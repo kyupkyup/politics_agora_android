@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.politicsagora.DetailActivity
 import com.example.politicsagora.R
 import com.example.politicsagora.viewmodel.DetailViewModel
 import com.google.android.material.tabs.TabLayout
@@ -50,6 +51,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        (activity as DetailActivity?)!!.supportActionBar!!.title = sharedViewModel.candidateName + "의 공약"
 
         sharedViewModel.itemLiveData.observe(viewLifecycleOwner, Observer {
             detailAdapter = DetailAdapter(this, it)

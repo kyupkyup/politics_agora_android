@@ -1,19 +1,20 @@
 package com.example.politicsagora.detailFragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.example.politicsagora.MainFragmentDirections
+import com.example.politicsagora.DetailActivity
+import com.example.politicsagora.MainActivity
 import com.example.politicsagora.R
 import com.example.politicsagora.viewmodel.DetailViewModel
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,21 +53,23 @@ class DetailMainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val button : Button = view.findViewById(R.id.promise_button)
+
         button.text = "공약 불러오는 중..."
         button.setEnabled(false)
 
-        sharedViewModel.itemLiveData.observe(viewLifecycleOwner, Observer{
+        sharedViewModel.itemLiveData.observe(viewLifecycleOwner, Observer {
             button.setEnabled(true)
-            button.text= "공약 보기"
+            button.text = "공약 보기"
         })
-        sharedViewModel.resultItemLiveData.observe(viewLifecycleOwner, Observer{
-            button.text = "공약  없음"
-            Toast.makeText(getActivity(), "해당 후보자는 등록된 공약이 없습니다.", Toast.LENGTH_LONG ).show()
+        sharedViewModel.resultItemLiveData.observe(viewLifecycleOwner, Observer {
+            button.text = "공약 없음"
+            Toast.makeText(getActivity(), "해당 후보자는 등록된 공약이 없습니다.", Toast.LENGTH_LONG).show()
         })
 
+        (activity as DetailActivity?)!!.supportActionBar!!.title = sharedViewModel.candidateName
+
         button.setOnClickListener {
-            val actionDetailMainFragment =
-                DetailMainFragmentDirections.actionDetailMainFragment2ToDetailFragment2()
+            val actionDetailMainFragment = DetailMainFragmentDirections.actionDetailMainFragmentToDetailFragment()
             findNavController().navigate(actionDetailMainFragment)
             }
 

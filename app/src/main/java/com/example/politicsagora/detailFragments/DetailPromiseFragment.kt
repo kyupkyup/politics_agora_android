@@ -41,7 +41,7 @@ class DetailPromiseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail1, container, false)
+        return inflater.inflate(R.layout.fragment_detail_promise, container, false)
     }
 
 
