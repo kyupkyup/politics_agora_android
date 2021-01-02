@@ -16,6 +16,8 @@ class CandidtatesOfVoteViewModel : ViewModel() {
 
     val itemLiveData = MutableLiveData<List<Candidate>>()
     val loadingItemLiveData = MutableLiveData<Boolean>()
+    val resultItemLiveData = MutableLiveData<String>()
+
     var sgId: String = ""
     var sgTypecode: String = ""
 
@@ -35,8 +37,12 @@ class CandidtatesOfVoteViewModel : ViewModel() {
     fun fetchCandidateInfo() {
         loadingItemLiveData.value = true
         viewModelScope.launch {
-            val candidateInfo = service.fetchCandidates(sgId, sgTypecode);
-            itemLiveData.value = candidateInfo.candidates
+            try {
+                val candidateInfo = service.fetchCandidates(sgId, sgTypecode);
+                itemLiveData.value = candidateInfo.candidates
+            } catch (e: Throwable) {
+                resultItemLiveData.value = "error"
+            }
         }
         loadingItemLiveData.value = false
 

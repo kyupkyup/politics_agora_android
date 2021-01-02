@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -72,6 +73,11 @@ class Candidates : Fragment() {
         viewModel.itemLiveData.observe(viewLifecycleOwner, Observer {
             candidateAdapter.updateCandidateItems(it)
             loadingDialog.dismiss()
+        })
+        viewModel.resultItemLiveData.observe(viewLifecycleOwner, Observer{
+            Toast.makeText(getActivity(), "리스트를 불러올 수 없습니다.", Toast.LENGTH_LONG ).show()
+            loadingDialog.dismiss()
+            findNavController().popBackStack()
         })
 
         candidate_recycler_view.addOnItemTouchListener(

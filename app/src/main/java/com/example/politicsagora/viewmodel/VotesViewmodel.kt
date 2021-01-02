@@ -1,9 +1,12 @@
 package com.example.politicsagora.viewmodel
 
 import android.util.Log
+import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.politicsagora.MainActivity
 import com.example.politicsagora.model.Vote
 import com.example.politicsagora.repository.APIGetVoteCodeService
 import kotlinx.coroutines.launch
@@ -14,6 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class VotesViewmodel : ViewModel() {
     val itemLiveData = MutableLiveData<List<Vote>>()
     val loadingItemLiveData = MutableLiveData<Boolean>()
+    val resultItemLiveData = MutableLiveData<String>()
 
     private var service : APIGetVoteCodeService
 
@@ -31,8 +35,14 @@ class VotesViewmodel : ViewModel() {
         loadingItemLiveData.value = true
 
         viewModelScope.launch {
-            val voteInfo = service.fetchVote();
-            itemLiveData.value = voteInfo.votes
+            try{
+                val voteInfo = service.fetchVote();
+                itemLiveData.value = voteInfo.votes
+            }
+
+            catch (e: Throwable) {
+                resultItemLiveData.value = "error"
+            }
         }
         loadingItemLiveData.value = false
 

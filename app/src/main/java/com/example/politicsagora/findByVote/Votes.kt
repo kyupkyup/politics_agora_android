@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -68,6 +69,11 @@ class Votes : Fragment() {
             voteAdapter.updateVoteItems(it)
             loadingDialog.dismiss()
 
+        })
+        viewModel.resultItemLiveData.observe(viewLifecycleOwner, Observer{
+            Toast.makeText(getActivity(), "리스트를 불러올 수 없습니다.", Toast.LENGTH_LONG ).show()
+            loadingDialog.dismiss()
+            findNavController().popBackStack()
         })
 
         vote_recycler_view.addOnItemTouchListener(

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -58,6 +59,11 @@ class DetailMainFragment : Fragment() {
             button.setEnabled(true)
             button.text= "공약 보기"
         })
+        sharedViewModel.resultItemLiveData.observe(viewLifecycleOwner, Observer{
+            button.text = "공약  없음"
+            Toast.makeText(getActivity(), "해당 후보자는 등록된 공약이 없습니다.", Toast.LENGTH_LONG ).show()
+        })
+
         button.setOnClickListener {
             val actionDetailMainFragment =
                 DetailMainFragmentDirections.actionDetailMainFragment2ToDetailFragment2()

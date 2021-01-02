@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -42,11 +43,6 @@ class DetailActivity : AppCompatActivity() {
         viewModel.career2= args.career2
 
         viewModel.fetchCandidateInfo()
-
-
-        viewModel.itemLiveData.observe(this, Observer{
-            // 공약보기 버튼 활성화  -> viewpager fragment로  넘어감
-        })
 
 
    }

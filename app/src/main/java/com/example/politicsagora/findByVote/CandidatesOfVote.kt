@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -24,6 +25,7 @@ import com.example.politicsagora.util.RecyclerViewItemClickListener
 import com.example.politicsagora.viewSource.LoadingDialog
 import com.example.politicsagora.viewmodel.CandidtatesOfVoteViewModel
 import com.example.politicsagora.viewmodel.VotesViewmodel
+import kotlinx.android.synthetic.main.fragment_main.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,6 +85,11 @@ class CandidatesOfVote : Fragment() {
         viewModel.itemLiveData.observe(viewLifecycleOwner, Observer {
             candidateAdapter.updateCandidateItems(it)
             loadingDialog.dismiss()
+        })
+        viewModel.resultItemLiveData.observe(viewLifecycleOwner, Observer{
+            Toast.makeText(getActivity(), "리스트를 불러올 수 없습니다.", Toast.LENGTH_LONG ).show()
+            loadingDialog.dismiss()
+            findNavController().popBackStack()
         })
 
         candidate_recycler_view.addOnItemTouchListener(

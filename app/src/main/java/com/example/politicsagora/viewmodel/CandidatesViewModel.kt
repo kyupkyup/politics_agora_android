@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.politicsagora.model.Candidate
 import com.example.politicsagora.repository.APIGetCandidatesService
+import com.example.politicsagora.repository.APIGetElectedService
 import com.example.politicsagora.repository.APIGetVoteCodeService
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
@@ -16,8 +17,9 @@ import java.util.concurrent.TimeUnit
 class CandidatesViewModel : ViewModel() {
     val itemLiveData = MutableLiveData<List<Candidate>>()
     val loadingItemLiveData = MutableLiveData<Boolean>()
+    val resultItemLiveData = MutableLiveData<String>()
 
-    private var service : APIGetCandidatesService
+    private var service: APIGetElectedService
 
     init {
         val okHttpClient = OkHttpClient.Builder()
@@ -27,21 +29,28 @@ class CandidatesViewModel : ViewModel() {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl(APIGetVoteCodeService.BASE_URL)
+            .baseUrl(APIGetElectedService.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        service = retrofit.create(APIGetCandidatesService::class.java)
+        service = retrofit.create(APIGetElectedService::class.java)
         fetchCandidateInfo()
     }
 
-    fun fetchCandidateInfo(){
+    fun fetchCandidateInfo() {
         loadingItemLiveData.value = true
 
         viewModelScope.launch {
-            val candidateInfo = service.fetchCandidates("20200415", "2");
-            itemLiveData.value = candidateInfo.candidates
+            try {
+                val candidateInfo = service.fetchElected("20180613", "3");
+                itemLiveData.value = candidateInfo.candidates
+            }
+            catch (e: Throwable) {
+                resultItemLiveData.value = "error"
+            }
+
+
         }
         loadingItemLiveData.value = false
 
