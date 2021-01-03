@@ -1,3 +1,4 @@
+
 package com.example.politicsagora.detailFragments
 
 import android.os.Bundle
