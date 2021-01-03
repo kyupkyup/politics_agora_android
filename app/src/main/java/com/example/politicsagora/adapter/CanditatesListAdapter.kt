@@ -59,7 +59,6 @@ class CanditatesListAdapter : RecyclerView.Adapter<CandidateViewHolder>() {
             view.context.getResources().getIdentifier(str, "raw", "com.example.politicsagora")
         if (resID != 0) {
             holder.candidateImageView.setImageResource(resID)
-
         }
         holder.textCandidateName.text = CandidateItems[position].candidateName
         holder.textPartyName.text = CandidateItems[position].party

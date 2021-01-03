@@ -27,7 +27,6 @@ class DetailPromiseFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -48,7 +47,7 @@ class DetailPromiseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.takeIf { it.containsKey(ARG_OBJECT) }?.apply {
             val textView: TextView = view.findViewById(R.id.detail_text1)
-            textView.text = getParcelable<ParsedCandidateDetail>(ARG_OBJECT).toString()
+            textView.text = getString(ARG_OBJECT)
         }
     }
 }

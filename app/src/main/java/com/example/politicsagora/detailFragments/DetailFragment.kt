@@ -62,7 +62,12 @@ class DetailFragment : Fragment() {
 
             TabLayoutMediator(tabLayout, viewPager, TabLayoutMediator.TabConfigurationStrategy
             { tab, position ->
-                tab.text = "${it[position].prmsRealmName}"
+                if(it[position].prmsRealmName == ""){
+                    tab.text = "${it[position].prmsTitle}"
+                }
+                else{
+                    tab.text = "${it[position].prmsRealmName}"
+                }
             }).attach()
         })
 

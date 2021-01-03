@@ -13,7 +13,7 @@ import com.example.politicsagora.viewmodel.DetailViewModel
 class DetailAdapter(fragment: Fragment, val parsedDetailList: List<ParsedCandidateDetail>) :
     FragmentStateAdapter(fragment) {
 
-    var size: Int = 10
+    var size: Int = parsedDetailList.size
     override fun getItemCount(): Int {
 
         return size
@@ -23,7 +23,12 @@ class DetailAdapter(fragment: Fragment, val parsedDetailList: List<ParsedCandida
         val DetailPromiseFragment = DetailPromiseFragment()
 
         DetailPromiseFragment.arguments = Bundle().apply {
-            putParcelable("object", parsedDetailList[position])
+            if (parsedDetailList[position].prmmCont == "") {
+                putString("object", "공약 없음")
+            } else {
+                putString("object", parsedDetailList[position].prmmCont)
+
+            }
         }
         return DetailPromiseFragment
     }

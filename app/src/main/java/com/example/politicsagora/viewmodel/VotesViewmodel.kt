@@ -26,8 +26,8 @@ class VotesViewmodel : ViewModel() {
             .baseUrl(APIGetVoteCodeService.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
         service = retrofit.create(APIGetVoteCodeService::class.java)
+
         fetchVoteInfo()
     }
 
@@ -36,12 +36,16 @@ class VotesViewmodel : ViewModel() {
 
         viewModelScope.launch {
             try{
+
                 val voteInfo = service.fetchVote();
+
                 itemLiveData.value = voteInfo.votes
             }
 
             catch (e: Throwable) {
+                Log.d("result", e.toString())
                 resultItemLiveData.value = "error"
+
             }
         }
         loadingItemLiveData.value = false

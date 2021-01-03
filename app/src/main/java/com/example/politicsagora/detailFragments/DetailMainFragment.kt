@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -53,9 +55,37 @@ class DetailMainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val button : Button = view.findViewById(R.id.promise_button)
+        val iamge : ImageView = view.findViewById(R.id.imageView)
+        val candidate_name : TextView = view.findViewById(R.id.candidate_name)
+        val sggName : TextView = view.findViewById(R.id.sggName)
+        val party_name : TextView = view.findViewById(R.id.party_name)
+        val gender : TextView = view.findViewById(R.id.gender)
+        val birthday_age : TextView = view.findViewById(R.id.birthday_age)
+        val address : TextView = view.findViewById(R.id.address)
+        val job : TextView = view.findViewById(R.id.job)
+        val education : TextView = view.findViewById(R.id.education)
+        val career1 : TextView = view.findViewById(R.id.career1)
+        val career2 : TextView = view.findViewById(R.id.career2)
+        var str = "_${sharedViewModel.candidateId}"
+        var resID: Int =
+            view.context.getResources().getIdentifier(str, "raw", "com.example.politicsagora")
+        if (resID != 0) {
+            iamge.setImageResource(resID)
+        }
+        candidate_name.text = "${sharedViewModel.candidateName}(${sharedViewModel.candidateChineseName})"
+        sggName.text = sharedViewModel.cityName
+        party_name.text = sharedViewModel.party
+        gender.text = sharedViewModel.gender
+        birthday_age.text = "${sharedViewModel.birthday}(${sharedViewModel.age}세)"
+        address.text = sharedViewModel.addr
+        job.text = sharedViewModel.job
+        education.text = sharedViewModel.edu
+        career1.text = sharedViewModel.career1
+        career2.text = sharedViewModel.career2
 
         button.text = "공약 불러오는 중..."
         button.setEnabled(false)
+
 
         sharedViewModel.itemLiveData.observe(viewLifecycleOwner, Observer {
             button.setEnabled(true)
@@ -72,6 +102,9 @@ class DetailMainFragment : Fragment() {
             val actionDetailMainFragment = DetailMainFragmentDirections.actionDetailMainFragmentToDetailFragment()
             findNavController().navigate(actionDetailMainFragment)
             }
+
+
+
 
     }
 
