@@ -6,7 +6,7 @@
     app:startDestination="@id/detailMainFragment">
     <fragment
         android:id="@+id/detailMainFragment"
-        android:name="com.example.politicsagora.detailFragments.DetailMainFragment"
+        android:name="com.kyupkyup.politicsagora.detailFragments.DetailMainFragment"
         android:label=""
         tools:layout="@layout/fragment_detail_main">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.politicsagora.detailFragments.DetailFragment"
+        android:name="com.kyupkyup.politicsagora.detailFragments.DetailFragment"
         android:label=""
         tools:layout="@layout/fragment_detail" />
 </navigation>

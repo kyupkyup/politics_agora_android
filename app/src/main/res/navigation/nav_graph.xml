@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/votes"
-        android:name="com.example.politicsagora.findByVote.Votes"
+        android:name="com.kyupkyup.politicsagora.findByVote.Votes"
         android:label="선거로 찾기"
         tools:layout="@layout/fragment_votes">
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/candidates"
-        android:name="com.example.politicsagora.findByCandidate.Candidates"
+        android:name="com.kyupkyup.politicsagora.findByCandidate.Candidates"
         android:label="시·도지사 공약"
         tools:layout="@layout/fragment_candidates">
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/candidatesOfVote"
-        android:name="com.example.politicsagora.findByVote.CandidatesOfVote"
+        android:name="com.kyupkyup.politicsagora.findByVote.CandidatesOfVote"
         android:label="후보자"
         tools:layout="@layout/fragment_candidates_of_vote">
         <argument
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.politicsagora.MainFragment"
+        android:name="com.kyupkyup.politicsagora.MainFragment"
         android:label="　"
         tools:layout="@layout/fragment_main">
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <activity
         android:id="@+id/detailActivity"
-        android:name="com.example.politicsagora.DetailActivity"
+        android:name="com.kyupkyup.politicsagora.DetailActivity"
         android:label="　"
         tools:layout="@layout/activity_detail">
         <argument

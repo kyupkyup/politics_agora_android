@@ -37,22 +37,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textSize="20sp"
+                android:fontFamily="@font/seoulhangangb"
+                android:text="후보자 이름"
+
                 android:textFontWeight="600"
-                android:text="후보자 이름" />
+                android:textSize="20sp"
+
+                />
 
             <TextView
                 android:id="@+id/sggName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="선거구 이름" />
+                android:fontFamily="@font/seoulhangangl"
+                android:text="선거구 이름"
+                android:textSize="15dp"
+
+                />
 
             <TextView
                 android:id="@+id/party_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/seoulhangangl"
+                android:textSize="15dp"
                 android:text="정당명" />
 
             <TextView
@@ -60,6 +70,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/seoulhangangl"
+                android:textSize="15dp"
                 android:text="성별" />
 
             <TextView
@@ -67,6 +79,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/seoulhangangl"
+                android:textSize="15dp"
                 android:text="생년월일(나이)" />
 
             <TextView
@@ -74,6 +88,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/seoulhangangl"
+                android:textSize="15dp"
                 android:text="주소" />
 
             <TextView
@@ -81,6 +97,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/seoulhangangl"
+                android:textSize="15dp"
                 android:text="직업" />
 
             <TextView
@@ -88,6 +106,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/seoulhangangl"
+                android:textSize="15dp"
                 android:text="학력" />
 
             <TextView
@@ -95,6 +115,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/seoulhangangl"
+                android:textSize="15dp"
                 android:text="경력1" />
 
             <TextView
@@ -102,6 +124,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/seoulhangangl"
+                android:textSize="15dp"
                 android:text="경력1" />
 
         </LinearLayout>
@@ -113,6 +137,7 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:text="공약보기"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

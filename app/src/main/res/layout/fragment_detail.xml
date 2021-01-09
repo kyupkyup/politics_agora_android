@@ -28,5 +28,7 @@
         app:layout_constraintStart_toStartOf="@id/viewPager"
         app:tabIndicatorColor="#222222"
         app:tabIndicatorGravity="top"
+        android:fontFamily="@font/seoulhangangl"
+
         app:tabMode="scrollable" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".detailFragments.DetailPromiseFragment">
+    tools:context=".detailFragments.DetailPromiseFragment"
+
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,6 +16,8 @@
             android:id="@+id/detail_text1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="15sp" />
+            android:fontFamily="@font/seoulhangangl"
+
+            android:textSize="15dp" />
     </ScrollView>
 </FrameLayout>
