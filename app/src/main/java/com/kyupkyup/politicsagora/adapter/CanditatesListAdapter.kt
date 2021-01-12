@@ -54,7 +54,7 @@ class CanditatesListAdapter : RecyclerView.Adapter<CandidateViewHolder>() {
     ) {
         var str = "_${CandidateItems[position].candidateId}"
         var resID: Int =
-            view.context.getResources().getIdentifier(str, "raw", "com.kyupkyup.com.kyupykyup.politicsagora")
+            view.context.getResources().getIdentifier(str, "raw", "com.kyupkyup.politicsagora")
         if (resID != 0) {
             holder.candidateImageView.setImageResource(resID)
         }

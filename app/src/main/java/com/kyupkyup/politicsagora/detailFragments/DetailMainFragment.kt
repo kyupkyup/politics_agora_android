@@ -68,7 +68,7 @@ class DetailMainFragment : Fragment() {
         val career2 : TextView = view.findViewById(R.id.career2)
         var str = "_${sharedViewModel.candidateId}"
         var resID: Int =
-            view.context.getResources().getIdentifier(str, "raw", "com.kyupkyup.com.kyupykyup.politicsagora")
+            view.context.getResources().getIdentifier(str, "raw", "com.kyupkyup.politicsagora")
         if (resID != 0) {
             iamge.setImageResource(resID)
         }
