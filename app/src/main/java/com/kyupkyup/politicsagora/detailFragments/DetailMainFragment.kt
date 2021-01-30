@@ -2,6 +2,7 @@
 package com.kyupkyup.politicsagora.detailFragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -86,7 +87,9 @@ class DetailMainFragment : Fragment() {
         button.text = "공약 불러오는 중..."
         button.setEnabled(false)
 
+        if(sharedViewModel.getPromiseEachFromDatatbase() == null){
 
+        }
         sharedViewModel.itemLiveData.observe(viewLifecycleOwner, Observer {
             button.setEnabled(true)
             button.text = "공약 보기"

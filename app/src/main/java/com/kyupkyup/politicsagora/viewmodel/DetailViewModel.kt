@@ -1,8 +1,11 @@
 package com.kyupkyup.politicsagora.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import android.util.Log
+import androidx.lifecycle.*
+import androidx.room.Room
+import com.kyupkyup.politicsagora.cache.promiseCache.AppDataBase
+import com.kyupkyup.politicsagora.cache.promiseCache.Promise
 import com.kyupkyup.politicsagora.model.CandidateDetail
 import com.kyupkyup.politicsagora.model.ParsedCandidateDetail
 import com.kyupkyup.politicsagora.repository.APIGetCandidateDetailService
@@ -12,10 +15,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(application: Application) : AndroidViewModel(application) {
     val itemLiveData = MutableLiveData<List<ParsedCandidateDetail>>()
     val loadingItemLiveData = MutableLiveData<Boolean>()
     val resultItemLiveData = MutableLiveData<String>()
+
+    private val db = Room.databaseBuilder(application, AppDataBase::class.java, "promise")
+        .allowMainThreadQueries().build()
 
     var sgId: String = ""
     var sgTypecode: String = ""
@@ -51,20 +57,39 @@ class DetailViewModel : ViewModel() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+
         service = retrofit.create(APIGetCandidateDetailService::class.java)
+
+    }
+
+    fun getPromiseFromDatatbase(): LiveData<List<Promise>> {
+        return db.promiseDAO().getAll()
+    }
+
+    fun getPromiseEachFromDatatbase(): Promise? {
+        return db.promiseDAO().getPromise(candidateId)
     }
 
     fun fetchCandidateInfo() {
         loadingItemLiveData.value = true
-        viewModelScope.launch() {
-            try {
-                val candidateDetailInfo = service.fetchCandidatesDetail(sgId, sgTypecode, candidateId)
-                itemLiveData.value = parseCandidateDetail(candidateDetailInfo.candidateDetails)
+        var temp: Promise? = getPromiseEachFromDatatbase()
+        Log.d("test123", temp.toString())
+        if (temp == null) {
 
-            } catch (e: Throwable) {
-                resultItemLiveData.value = "error"
+            viewModelScope.launch() {
+                try {
+                    val candidateDetailInfo =
+                        service.fetchCandidatesDetail(sgId, sgTypecode, candidateId)
+                    itemLiveData.value = parseCandidateDetail(candidateDetailInfo.candidateDetails)
+
+                } catch (e: Throwable) {
+                    resultItemLiveData.value = "error"
+                }
             }
+        } else {
+            itemLiveData.value = parseCandidateDetail(temp.list)
         }
+
         loadingItemLiveData.value = false
 
     }
